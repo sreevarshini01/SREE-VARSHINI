@@ -246,3 +246,273 @@ public String twoChar(String str, int index) {
     return  (str.length() <= index + 1 || index < 0) ? str.substring(0,2): str.substring(index, index + 2);
 }
 
+#middleThree
+Given a string of odd length, return the string length 3 from its middle, so "Candy" yields "and". The string length will be at least 3.
+
+
+middleThree("Candy") → "and"
+middleThree("and") → "and"
+middleThree("solving") → "lvi"
+
+PROGRAM:
+public String middleThree(String str) {
+    int mid = str.length() / 2;
+    return str.substring(mid - 1, mid + 2);
+}
+
+#hasBad
+Given a string, return true if "bad" appears starting at index 0 or 1 in the string, such as with "badxxx" or "xbadxx" but not "xxbadxx". The string may be any length, including 0. Note: use .equals() to compare 2 strings.
+
+
+PROGRAM:
+int len = str.length();
+	if(len == 3 && str.equals("bad"))
+		return true;
+	else if(len >= 4)
+	{
+		if(str.substring(0, 3).equals("bad"))
+			return true;
+		return str.substring(1, 4).equals("bad");
+	}
+	else
+		return false;
+        
+#atFirst
+Given a string, return a string length 2 made of its first 2 chars. If the string length is less than 2, use '@' for the missing chars.
+
+PROGRAM:
+public String atFirst(String str) {
+  	int len = str.length();
+	if(len >= 2)
+		return str.substring(0, 2);
+	else if(len == 1)
+		return (str.charAt(0)+"@");
+	else
+		return "@@";
+
+}
+
+#lastChars
+Given 2 strings, a and b, return a new string made of the first char of a and the last char of b, so "yo" and "java" yields "ya". If either string is length 0, use '@' for its missing char.
+
+PROGRAM:
+public String lastChars(String a, String b) {
+int lenB = b.length();
+	String combStr = "";
+	combStr += (a.length() >= 1) ? a.charAt(0) : '@';
+	combStr += (lenB >= 1) ? b.charAt(lenB-1) : '@';
+	return combStr;
+}
+
+#lastChars
+Given 2 strings, a and b, return a new string made of the first char of a and the last char of b, so "yo" and "java" yields "ya". If either string is length 0, use '@' for its missing char.
+
+
+PROGRAM:
+public String conCat(String a, String b) {
+int lenA = a.length();
+	int lenB = b.length();
+	if(lenA >= 1 && lenB >= 1)
+	{
+		if(a.charAt(lenA-1) == b.charAt(0))
+			return (a + b.substring(1));
+		else
+			return (a + b);
+	}
+	return (a + b);
+}
+
+#lastTwo
+Given a string of any length, return a new string where the last 2 chars, if present, are swapped, so "coding" yields "codign".
+
+PROGRAM:
+public String lastTwo(String str)
+{
+	int len = str.length();
+	if(len >= 2)
+		return str.substring(0, len-2)+str.charAt(len-1)+str.charAt(len-2);
+	else
+		return str;
+}
+
+#seeColor
+Given a string, if the string begins with "red" or "blue" return that color string, otherwise return the empty string.
+
+PROGRAM:
+public String seeColor(String str) {
+  int len = str.length();
+	if(len >= 4)
+	{
+		if(str.substring(0, 4).equals("blue"))
+			return "blue";
+		else if(str.substring(0, 3).equals("red"))
+			return "red";
+		else
+			return "";
+	}	
+	else if(len == 3)
+	{
+		if(str.substring(0, 3).equals("red"))
+			return "red";
+		else
+			return "";
+	}
+	else
+		return "";
+}
+
+#frontAgain
+Given a string, return true if the first 2 chars in the string also appear at the end of the string, such as with "edited".
+
+PROGRAM:
+public boolean frontAgain(String str)
+{
+	int len = str.length();
+	if(len >= 2)
+		return str.substring(0, 2).equals(str.substring(len-2, len));
+	else
+		return false;
+  
+}
+
+#minCat
+Given two strings, append them together (known as "concatenation") and return the result. However, if the strings are different lengths, omit chars from the longer string so it is the same length as the shorter string. So "Hello" and "Hi" yield "loHi". The strings may be any length.
+
+PROGRAM:
+public String minCat(String a, String b)
+{
+	int lenA = a.length();
+	int lenB = b.length();
+	if(lenA >= lenB)
+		return (a.substring(lenA-lenB) + b);
+	else
+		return (a + b.substring(lenB-lenA));
+}
+
+#extraFront
+Given a string, return a new string made of 3 copies of the first 2 chars of the original string. The string may be any length. If there are fewer than 2 chars, use whatever is there.
+
+PROGRAM:
+public String extraFront(String str)
+{
+	String temp;
+	if(str.length() >= 3)
+		temp = str.substring(0, 2);
+	else
+		temp = str;
+	return (temp + temp + temp);
+}
+
+#without2
+Given a string, if a length 2 substring appears at both its beginning and end, return a string without the substring at the beginning, so "HelloHe" yields "lloHe". The substring may overlap with itself, so "Hi" yields "". Otherwise, return the original string unchanged.
+
+
+PROGRAM:
+public String without2(String str)
+{
+	int len = str.length();
+	if(len >= 2)
+	{
+		if(str.substring(0,2).equals(str.substring(len-2, len)))
+			return str.substring(2);
+		else
+			return str;
+	}
+	else
+		return str;
+}
+
+#deFront
+Given a string, return a version without the first 2 chars. Except keep the first char if it is 'a' and keep the second char if it is 'b'. The string may be any length. Harder than it looks.
+
+PROGRAM:
+public String deFront(String str)
+{    
+	int len = str.length();
+	if(len >= 2)
+	{
+		StringBuilder stbuild = new StringBuilder(len);
+		if(str.charAt(0) == 'a')
+			stbuild.append('a');
+		if(str.charAt(1) == 'b')
+			stbuild.append('b');
+		stbuild.append(str.substring(2));
+		return stbuild.toString();
+	}
+	else if(len == 1 && str.charAt(0) == 'a')
+		return "a";
+	else
+		return "";
+}
+
+#startWord
+Given a string and a second "word" string, we'll say that the word matches the string if it appears at the front of the string, except its first char does not need to match exactly. On a match, return the front of the string, or otherwise return the empty string. So, so with the string "hippo" the word "hi" returns "hi" and "xip" returns "hip". The word will be at least length 1.
+
+PROGRAM:
+public String startWord(String str, String word)
+{
+	int lenStr = str.length();
+	int lenWord = word.length();
+	String temp;
+	if(lenStr >= lenWord)
+	{
+		temp = str.substring(1, lenWord);
+		if(word.substring(1).equals(temp))
+			return (str.charAt(0)+temp);
+		else
+			return "";
+	}
+	else
+		return "";
+}
+
+#withoutX
+Given a string, if the first or last chars are 'x', return the string without those 'x' chars, and otherwise return the string unchanged.
+
+PROGRAM:
+public String withoutX(String str)
+{
+	int len = str.length();
+	if(len >= 2)
+	{
+		char ch = str.charAt(0);
+		StringBuilder stbuild = new StringBuilder(len);
+		if(ch != 'x')
+			stbuild.append(ch);
+		stbuild.append(str.substring(1, len-1));
+		ch = str.charAt(len-1);
+		if(ch != 'x')
+			stbuild.append(ch);
+		return stbuild.toString();
+	}
+	else if(len == 1 && str.charAt(0) == 'x')
+		return "";
+	else
+		return str;
+}
+
+
+#withoutX2
+Given a string, if one or both of the first 2 chars is 'x', return the string without those 'x' chars, and otherwise return the string unchanged. This is a little harder than it looks.
+
+PROGRAM:
+public String withoutX2(String str)
+{
+	int len = str.length();
+	if(len >= 2)
+	{
+		char ch = str.charAt(0);
+		StringBuilder stbuild = new StringBuilder(len);
+		if(ch != 'x')
+			stbuild.append(ch);
+		ch = str.charAt(1);
+		if(ch != 'x')
+			stbuild.append(ch);
+		stbuild.append(str.substring(2));
+		return stbuild.toString();
+	}
+	else if(len == 1 && str.charAt(0) == 'x')
+		return "";
+	else
+		return str;
+}
