@@ -1,0 +1,236 @@
+#countYZ
+Given a string, count the number of words ending in 'y' or 'z' -- so the 'y' in "heavy" and the 'z' in "fez" count, but not the 'y' in "yellow" (not case sensitive). We'll say that a y or z is at the end of a word if there is not an alphabetic letter immediately following it. (Note: Character.isLetter(char) tests if a char is an alphabetic letter.)
+
+PROGRAM:
+public int countYZ(String str) {
+  int len = str.length();
+  int count = 0;
+  str = str.toLowerCase();
+  for (int i = 0; i < len; i++) {
+    if (str.charAt(i) == 'y' || str.charAt(i) == 'z') {
+      if (i < len-1 && !Character.isLetter(str.charAt(i+1)))
+        count++;
+      else if (i == len-1)
+        count++;
+    }
+  }
+  return count;
+}
+
+#withoutString
+Given two strings, base and remove, return a version of the base string where all instances of the remove string have been removed (not case sensitive). You may assume that the remove string is length 1 or more. Remove only non-overlapping instances, so with "xxx" removing "xx" leaves "x".
+
+PROGRAM:
+public String withoutString(String base, String remove) {
+  int blen = base.length();
+  int rlen = remove.length();
+  String lowbase = base.toLowerCase();
+  String lowrem = remove.toLowerCase();
+  String fin = "";
+  for (int i = 0; i < blen; i++) {
+    if (i <= blen - rlen) {
+      String tmp = lowbase.substring(i,i+rlen);
+      if (!tmp.equals(lowrem))
+        fin += base.substring(i,i+1);
+      else {
+        i += rlen-1;
+      }
+    }
+    else {
+      String tmp2 = lowbase.substring(i,i+1);
+      if (!tmp2.equals(lowrem))
+        fin += base.substring(i,i+1);
+    }
+  }
+  return fin;
+}
+
+#equalIsNot
+Given a string, return true if the number of appearances of "is" anywhere in the string is equal to the number of appearances of "not" anywhere in the string (case sensitive).
+
+PROGRAM:
+public boolean equalIsNot(String str) {
+  int len = str.length();
+  int not = 0;
+  int is = 0;
+  for (int i = 0; i < len; i++) {
+    if (i < len - 2) {
+      String tmp = str.substring(i,i+3);
+      if (tmp.equals("not"))
+        not++;
+    }
+    if (i < len - 1) {
+      String tmp2 = str.substring(i,i+2);
+      if (tmp2.equals("is"))
+        is++;
+    }
+  }
+  if (not == is)
+    return true;
+    else
+    return false;
+}
+
+#gHappy
+We'll say that a lowercase 'g' in a string is "happy" if there is another 'g' immediately to its left or right. Return true if all the g's in the given string are happy.
+
+PROGRAM:
+public boolean gHappy(String str) {
+  int len = str.length();
+  boolean happy = true;
+  for (int i = 0; i < len; i++) {
+    if (str.charAt(i) == 'g') {
+      if (i > 0 && str.charAt(i-1) == 'g')
+        happy = true;
+      else if (i < len-1 && str.charAt(i+1) == 'g')
+        happy = true;
+      else
+        happy = false;
+    }
+  }
+  return happy;
+}
+
+#countTriple
+We'll say that a "triple" in a string is a char appearing three times in a row. Return the number of triples in the given string. The triples may overlap.
+
+PROGRAM:
+	public int countTriple(String str) {
+  int len = str.length();
+  int count = 0;
+  for (int i = 0; i < len-2; i++){
+    char tmp = str.charAt(i);
+    if (tmp == str.charAt(i+1) && tmp == str.charAt(i+2))
+      count++;
+  }
+  return count;
+}
+
+#sumDigits
+Given a string, return the sum of the digits 0-9 that appear in the string, ignoring all other characters. Return 0 if there are no digits in the string. (Note: Character.isDigit(char) tests if a char is one of the chars '0', '1', .. '9'. Integer.parseInt(string) converts a string to an int.)
+
+PROGRAM:
+public int sumDigits(String str) {
+  int len = str.length();
+  int sum = 0;
+  for (int i = 0; i < len; i++) {
+    if (Character.isDigit(str.charAt(i))) {
+      String tmp = str.substring(i,i+1);
+      sum += Integer.parseInt(tmp);
+    }
+  }
+  return sum;
+}
+
+#sameEnds
+Given a string, return the longest substring that appears at both the beginning and end of the string without overlapping. For example, sameEnds("abXab") is "ab".
+
+PROGRAM:
+public String sameEnds(String string) {
+  int len = string.length();
+  String fin = "";
+  String tmp = "";
+  for (int i = 0; i < len; i++) {
+    tmp += string.charAt(i);
+    int tmplen = tmp.length();
+    if (i < len / 2 && tmp.equals(string.substring(len-tmplen,len)))
+      fin = tmp;
+  }
+  return fin;
+}
+
+#mirrorEnds
+Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string. In other words, zero or more characters at the very begining of the given string, and at the very end of the string in reverse order (possibly overlapping). For example, the string "abXYZba" has the mirror end "ab"
+
+PROGRAM:
+public String mirrorEnds(String string) {
+  int len = string.length();
+  String fin = "";
+  String tmp1 = "";
+  String tmp2 = "";
+  for (int i = 0; i < len; i++) {
+    tmp1 += string.substring(i,i+1);
+    tmp2 = "";
+    for (int j = tmp1.length()-1; j >= 0; j--) {
+      tmp2 += tmp1.substring(j,j+1);
+      if (tmp2.equals(string.substring(len-i-1,len)))
+        fin = tmp1;
+    }
+  }
+  return fin;
+}
+
+#maxBlock
+Given a string, return the length of the largest "block" in the string. A block is a run of adjacent chars that are the same.
+
+PROGRAM:
+public int maxBlock(String str) {
+  int len = str.length();
+  int count = 0;
+  int tmpcount = 1;
+  if (len == 0)
+    return 0;
+  for (int i = 0; i < len; i++) {
+    if (i < len-1 && str.charAt(i) == str.charAt(i+1))
+      tmpcount++;
+    else
+      tmpcount = 1;
+    if (tmpcount > count)
+      count = tmpcount;
+  }
+  return count;
+}
+
+#sumNumbers
+Given a string, return the sum of the numbers appearing in the string, ignoring all other characters. A number is a series of 1 or more digit chars in a row. (Note: Character.isDigit(char) tests if a char is one of the chars '0', '1', .. '9'. Integer.parseInt(string) converts a string to an int.)
+
+PROGRAM:
+public int sumNumbers(String str) {
+  int len = str.length();
+  int sum = 0;
+  String tmp = "";
+  for (int i = 0; i < len; i++) {
+    if (Character.isDigit(str.charAt(i))) {
+      if (i < len-1 && Character.isDigit(str.charAt(i+1))) {
+        tmp += str.charAt(i);
+      }
+      else {
+        tmp += str.charAt(i);
+        sum += Integer.parseInt(tmp);
+        tmp = "";
+      }
+    }
+  }
+  return sum;
+}
+
+#notReplace
+Given a string, return a string where every appearance of the lowercase word "is" has been replaced with "is not". The word "is" should not be immediately preceeded or followed by a letter -- so for example the "is" in "this" does not count. (Note: Character.isLetter(char) tests if a char is a letter.)
+
+PROGRAM:
+public String notReplace(String str) {
+  String result = "";
+  int len = str.length();
+  for(int i = 0; i < len; i++){
+    if(i-1 >= 0 && Character.isLetter(str.charAt(i-1))
+    || i+2 < len && Character.isLetter(str.charAt(i+2))) {
+      result += str.charAt(i);
+    }
+    else if(i+1 < len && str.substring(i, i+2).equals("is")) {
+      result += "is not";
+      i++;
+    }
+    else result += str.charAt(i);
+  }
+  return result;
+}
+
+
+
+
+
+
+
+
+
+
