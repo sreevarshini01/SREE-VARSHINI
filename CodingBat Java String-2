@@ -1,0 +1,390 @@
+#doubleChar
+Given a string, return a string where for every char in the original, there are two chars.
+
+PROGRAM:
+public String doubleChar(String str) {
+String name = "";
+    for (int i = 0; i <=str.length()-1;i++) {
+           name += str.charAt(i);
+           name+= str.charAt(i); }
+         return name;
+}
+
+#countHi
+Return the number of times that the string "hi" appears anywhere in the given string.
+
+PROGRAM:
+public int countHi(String str) {
+ int count =0;
+ if (str.length() ==1 && str.charAt(0) == 'h')
+ count = 0;
+  else
+ {
+  for(int i = 0;i<str.length();i++) {
+  if ( (str.charAt(i) == 'h') && (str.charAt(i+1) == 'i') )
+  count+=1;
+ }
+  }
+  return count;
+}
+
+#catDog
+Return true if the string "cat" and "dog" appear the same number of times in the given string.
+
+PROGRAM:
+public boolean catDog(String str) {
+  int len = str.length();
+  int cat = 0;
+  int dog = 0;
+  for (int i = 0; i < len - 2; i++) {
+  String temp = str.substring(i, i+3);
+if (temp.compareTo("cat") == 0)
+  cat++; 
+if (temp.compareTo("dog") == 0)
+  dog++; 
+  }
+  if (cat == dog)
+  return true;
+else
+  return false;
+}
+
+#countCode
+Return the number of times that the string "code" appears anywhere in the given string, except we'll accept any letter for the 'd', so "cope" and "cooe" count.
+
+PROGRAM:
+public int countCode(String str) {
+  int len = str.length();
+  int count = 0;
+  String co = "co";
+  String e = "e";
+  if (len < 4)
+    return 0;
+  for (int i = 0; i < len - 3; i++) {
+    if (co.compareTo(str.substring(i,i+2)) == 0 && e.compareTo(str.substring(i+3, i+4)) == 0)
+      count++;
+  }
+  return count;
+}
+
+#endOther
+Given two strings, return true if either of the strings appears at the very end of the other string, ignoring upper/lower case differences (in other words, the computation should not be "case sensitive"). Note: str.toLowerCase() returns the lowercase version of a string.
+
+PROGRAM:;
+public boolean endOther(String a, String b) {
+  a = a.toLowerCase();
+  int aLen = a.length();
+  b = b.toLowerCase();
+  int bLen = b.length();
+  if (aLen < bLen) {
+    String temp = b.substring(bLen - aLen, bLen);
+    if (temp.compareTo(a) == 0)
+      return true;
+    else
+return false;
+  } else {
+String temp = a.substring(aLen - bLen, aLen);
+if (temp.compareTo(b) == 0)
+return true;
+else
+return false;
+  }
+}
+
+#xyzThere
+Return true if the given string contains an appearance of "xyz" where the xyz is not directly preceeded by a period (.). So "xxyz" counts but "x.xyz" does not
+
+PROGRAM:
+public Boolean xyzThere(String str) {
+  int len = str.length();
+  String xyz = "xyz";
+  Boolean match = false;
+  if (len < 3)
+    return false;
+  for (int i = 0; i < len - 2; i ++) {
+    String temp = str.substring(i, i+3);
+    if (temp.compareTo(xyz) == 0 && i == 0)
+      match = true;
+    else if(temp.compareTo(xyz) == 0 && str.charAt(i-1) != 46)
+      match = true;
+  } 
+  return match;
+}
+
+#bobThere
+Return true if the given string contains a "bob" string, but where the middle 'o' char can be any char.
+
+
+PROGRAM:
+public boolean bobThere(String str) {
+  int len = str.length();
+  for (int i = 0; i < len - 2; i++) {
+    if (str.charAt(i) == 'b' && str.charAt(i+2) == 'b')
+    return true;
+  }
+  return false;
+}
+
+#xyBalance
+We'll say that a String is xy-balanced if for all the 'x' chars in the string, there exists a 'y' char somewhere later in the string. So "xxy" is balanced, but "xyx" is not. One 'y' can balance multiple 'x's. Return true if the given string is xy-balanced.
+
+PROGRAM:
+public boolean xyBalance(String str) {
+  Boolean x = false;
+  Boolean y = false;
+  int len = str.length();
+  for (int i = 0; i < len; i++) {
+    if (str.charAt(i) == 'x' && y == true){
+      x = true;
+      y = false;
+    } else if (str.charAt(i) == 'x') {
+      x = true;
+    }
+    if (str.charAt(i) == 'y' && x == true)
+      y = true;
+  }
+  if (x == false)
+    y = true;
+  return y;
+}
+
+#mixString
+Given two strings, a and b, create a bigger string made of the first char of a, the first char of b, the second char of a, the second char of b, and so on. Any leftover chars go at the end of the result.
+
+PROGRAM:
+public String mixString(String a, String b) {
+  int aLen = a.length();
+  int bLen = b.length();
+  int max = Math.max(aLen, bLen);
+  String word = "";
+  for (int i = 0; i < max; i++) {
+    if (i <= aLen-1)
+      word += a.substring(i,i+1);
+    if (i <= bLen-1)
+      word += b.substring(i,i+1);
+  }
+  return word;
+}
+
+#repeatEnd
+Given a string and an int n, return a string made of n repetitions of the last n characters of the string. You may assume that n is between 0 and the length of the string, inclusive
+
+PROGRAM:
+public String repeatEnd(String str, int n) {
+  int len = str.length();
+  String newWord = "";
+  for (int i = 0; i < n; i++) {
+    newWord += str.substring(len - n, len);
+  }
+  return newWord;
+}
+
+#repeatFront
+Given a string and an int n, return a string made of the first n characters of the string, followed by the first n-1 characters of the string, and so on. You may assume that n is between 0 and the length of the string, inclusive (i.e. n >= 0 and n <= str.length())
+
+PROGRAM:
+public String repeatFront(String str, int n) {
+  int len = str.length();
+  String newWord = "";
+  for (int i = n; n > 0; n--){
+    newWord += str.substring(0,n);
+  }
+  return newWord;
+}
+
+#repeatSeparator
+Given two strings, word and a separator sep, return a big string made of count occurrences of the word, separated by the separator string.
+
+PROGRAM:
+public String repeatSeparator(String word, String sep, int count) {
+  String newWord = "";
+  for (int i = 0; i < count; i++) {
+    if (i < count-1)
+      newWord += word + sep;
+    else
+      newWord += word;
+  }
+  return newWord;
+}
+
+#prefixAgain
+Given a string, consider the prefix string made of the first N chars of the string. Does that prefix string appear somewhere else in the string? Assume that the string is not empty and that N is in the range 1..str.length().
+
+PROGRAM:
+public boolean prefixAgain(String str, int n) {
+  int len = str.length();
+  String prefix = str.substring(0,n);
+  for (int i = n; i < len; i++) {
+    if(n+i <= len) {
+      if (prefix.equals(str.substring(i,n+i)))
+        return true;
+    }
+  }
+  return false;
+}
+
+#xyzMiddle
+Given a string, does "xyz" appear in the middle of the string? To define middle, we'll say that the number of chars to the left and right of the "xyz" must differ by at most one. This problem is harder than it looks.
+
+PROGRAM:
+public boolean xyzMiddle(String str) {
+  String xyz = "xyz";
+  int len = str.length();
+  int middle = len / 2;
+  if (len < 3)
+    return false;
+  if (len % 2 != 0) {
+    if (xyz.equals(str.substring(middle-1,middle+2))) {
+      return true;
+    } else {
+        return false;
+      }
+  } else if (xyz.equals(str.substring(middle-1,middle+2)) ||
+      xyz.equals(str.substring(middle-2,middle+1))) {
+          return true;
+  } else
+      return false; 
+}
+
+#getSandwich
+A sandwich is two pieces of bread with something in between. Return the string that is between the first and last appearance of "bread" in the given string, or return the empty string "" if there are not two pieces of bread
+
+
+PROGRAM:
+	public String getSandwich(String str) {
+  int len = str.length();
+  String tmpString = "";
+  String finalString = "";
+  int start = 0;
+  int finish = 0;
+  boolean found = false;
+  if (len <= 10)
+    return "";
+  for (int i = 0; i < len - 4; i++) {
+    tmpString = str.substring(i, i+5);
+    if (tmpString.equals("bread") && found == true)
+      finish = i; 
+    if (tmpString.equals("bread") && found == false) {
+      start = i+5;
+      found = true;
+    }
+  }
+  finalString = str.substring(start,finish);
+  return finalString;
+}
+
+#sameStarChar
+Returns true if for every '*' (star) in the string, if there are chars both immediately before and after the star, they are the same.
+
+PROGRAM:
+public boolean sameStarChar(String str) {
+  int len = str.length();
+  boolean found = true;
+  for (int i = 0; i < len; i++) {
+    String tmpString = str.substring(i,i+1);
+    if (tmpString.equals("*") && i > 0 && i < len-1) {
+      if (str.charAt(i-1) == str.charAt(i+1))
+        found = true;
+      else
+        found = false;
+    }
+  }
+  return found;
+}
+
+#oneTwo
+Given a string, compute a new string by moving the first char to come after the next two chars, so "abc" yields "bca". Repeat this process for each subsequent group of 3 chars, so "abcdef" yields "bcaefd". Ignore any group of fewer than 3 chars at the end.
+
+PROGRAM:
+public String oneTwo(String str) {
+  String result = "";
+  for(int i=0; i <str.length()-2; i += 3)
+  {
+      result = result + str.substring(i+1,i+3) + str.charAt(i);
+  }
+  return result;
+}
+
+#zipZap
+Look for patterns like "zip" and "zap" in the string -- length-3, starting with 'z' and ending with 'p'. Return a string where for all such words, the middle letter is gone, so "zipXzap" yields "zpXzp".
+
+PROGRAM:
+public String zipZap(String str) {
+  int len = str.length();
+  String finalString = "";
+  for (int i = 0; i < len; i++) {
+    finalString += str.substring(i,i+1);
+    if (i > 0 && i < len-1) {
+      if (str.charAt(i-1) == 'z' && str.charAt(i+1) == 'p')
+        finalString = finalString.substring(0,finalString.length()-1);
+    }
+  }
+  return finalString;
+}
+
+#starOut
+Return a version of the given string, where for every star (*) in the string the star and the chars immediately to its left and right are gone. So "ab*cd" yields "ad" and "ab**cd" also yields "ad".
+
+PROGRAM:
+public String starOut(String str) {
+  int len = str.length();
+  String finalString = "";
+  for (int i = 0; i < len; i++) {
+    if (i == 0 && str.charAt(i) != '*')
+      finalString += str.charAt(i);
+    if (i > 0 && str.charAt(i) != '*' && str.charAt(i-1) != '*')
+      finalString += str.charAt(i);
+    if (i > 0 && str.charAt(i) == '*' && str.charAt(i-1) != '*')
+      finalString = finalString.substring(0,finalString.length()-1);
+  }
+  return finalString;
+}
+
+#plusOut
+Given a string and a non-empty word string, return a version of the original String where all chars have been replaced by pluses ("+"), except for appearances of the word string which are preserved unchanged.
+
+PROGRAM:
+public String plusOut(String str, String word) {
+  int slen = str.length();
+  int wlen = word.length();
+  String fin = "";
+  for (int i = 0; i < slen; i++) {
+    if (i <= slen - wlen) {
+      String tmp = str.substring(i,i+wlen);
+      if (tmp.equals(word)) {
+        fin += word;
+        i += wlen-1;
+      }
+      else
+        fin += "+";
+    }
+    else
+      fin += "+";
+  }
+  return fin;
+}
+
+#wordEnds
+Given a string and a non-empty word string, return a string made of each char just before and just after every appearance of the word in the string. Ignore cases where there is no char before or after the word, and a char may be included twice if it is between two words.
+
+
+PROGRAM:
+public String wordEnds(String str, String word) {
+  int slen = str.length();
+  int wlen = word.length();
+  String fin = "";
+  for (int i = 0; i < slen-wlen+1; i++) {
+    String tmp = str.substring(i,i+wlen);
+    if (i > 0 && tmp.equals(word))
+      fin += str.substring(i-1,i);
+    if (i < slen-wlen && tmp.equals(word))
+      fin += str.substring(i+wlen,i+wlen+1);
+  }
+  return fin;
+}
+
+
+
+
+
+
